@@ -1,0 +1,32 @@
+- coords: [0, 0]
+  challenge: 1
+  terrain: [temperate forest]
+  environment: [temperate forest]
+- coords: [0, 1]
+  challenge: 1
+  terrain: [temperate forest]
+  environment: [temperate forest, bandits]
+- coords: [1, 1]
+  challenge: 2
+  terrain: [temperate forest]
+  environment: [temperate forest, haunted]
+- coords: [1, 0]
+  challenge: 1
+  terrain: [temperate forest]
+  environment: [temperate forest]
+- coords: [1, 2]
+  challenge: 2
+  terrain: [hills]
+  environment: [temperate forest, bandits]
+- coords: [2, 2]
+  challenge: 3
+  terrain: [temperate forest]
+  environment: [temperate forest, wolf packs]
+- coords: [2, 1]
+  challenge: 2
+  terrain: [temperate forest]
+  environment: [temperate forest, haunted]
+- coords: [2, 0]
+  challenge: 2
+  terrain: [temperate forest]
+  environment: [temperate forest, bandits]

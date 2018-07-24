@@ -1,0 +1,28 @@
+temperate forest:
+  weather:
+  - name: Rain
+    occurrence: uncommon
+  - name: Fine
+    occurrence: common
+  - name: Storm
+    occurrence: rare
+  terrain features:
+  - A fern-filled clearing
+  - A thickly-wooded gully with steep sides
+  - A vine-choked thicket
+  - A huge fallen tree
+  - A maze of thorn-bushes
+hills:
+  weather:
+  - name: Rain
+    occurrence: uncommon
+  - name: Wind
+    occurrence: common
+  - name: Fine
+    occurrence: common
+  - name: Storm
+    occurrence: rare
+  terrain features:
+  - A steep-sided gully
+  - An exposed hilltop
+  - A valley of wind-twisted bushes

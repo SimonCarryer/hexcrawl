@@ -1,0 +1,10 @@
+Rain:
+  effect: Dim lighting, at night torches and fires give 50% less illumination
+Fine:
+  effect: None
+Storm:
+  effect: Dim lighting, at night torches and fires are very difficult to keep lit
+Wind:
+  effect: In exposed places, communication is hard
+Snow:
+  effect: Cold? I dunno
