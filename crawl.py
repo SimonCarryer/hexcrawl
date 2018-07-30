@@ -2,17 +2,6 @@ from hex import Map
 
 
 current_map = Map()
-#hex = current_map.get_hex_by_coords([0, 0])
-
-#encounter = current_map.current_hex.get_encounter()
-
-# for monster in environment_tags['haunted']:
-#     print(monster['Name'])
-#     print(encounter.acceptable_challenge(monster))
-#     print(encounter.right_role(monster))
-#     print(encounter.right_occurrence(monster))
-
-#print([monster['name'] for monster in encounter.possible_monsters(monsters['spooky forest'])])
 
 user_input = ''
 
