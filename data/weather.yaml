@@ -1,10 +1,15 @@
 Rain:
   effect: Dim lighting, at night torches and fires give 50% less illumination
+  visibility: 1
 Fine:
   effect: None
+  visibility: 2
 Storm:
   effect: Dim lighting, at night torches and fires are very difficult to keep lit
+  visibility: 0
 Wind:
   effect: In exposed places, communication is hard
+  visibility: 2
 Snow:
   effect: Cold? I dunno
+  visibility: 0

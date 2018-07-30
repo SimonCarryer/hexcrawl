@@ -1,11 +1,13 @@
 war graves:
   type: ruins
   name: The War Graves
+  description: A huge graveyard, overgrown with weeds and gnarled trees, the graves torn up and plundered.
   inhabitants: [haunted]
   rumours: [The graves of soldiers killed in the early days of the war, Some soldiers were buried with their wealth]
   infamy: local
   challenge: 2
-  dungeon:
-    style: dungeon
-    purpose: tomb
-    challenge: 2
+  dungeons:
+    - name: Prince's Tomb
+      style: dungeon
+      purpose: tomb
+      challenge: 2

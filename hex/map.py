@@ -52,23 +52,24 @@ class Map:
             encounter['location'] = self.current_hex.get_scenery()
         return encounter
 
-    def visible_terrain(self):
+    def visible_terrain(self, visibility):
         for hex_ in self.hexes:
             if hex_ != self.current_hex:
-                for terrain in hex_.visible_terrain(self.current_hex.coords, 1):
+                for terrain in hex_.visible_terrain(self.current_hex.coords, visibility):
                     yield terrain
 
-    def parse_visible_terrain(self):
-        parsed = defaultdict(list)
-        visible = [terrain for terrain in self.visible_terrain()]
+    def parse_visible_terrain(self, visibility):
+        parsed = defaultdict(set)
+        visible = [terrain for terrain in self.visible_terrain(visibility)]
         for terrain, distance, direction in visible:
-            parsed[self.reversed_directions[direction]].append((terrain, distance))
+            parsed[self.reversed_directions[direction]].add((terrain, distance))
         return dict(parsed)
 
     def look(self):
-        return {'terrain': self.current_hex.terrain, 
-                'weather': self.current_hex.get_weather()['name'],
+        weather = self.current_hex.get_weather()
+        return {'terrain': self.current_hex.terrain,
+                'visible': self.parse_visible_terrain(weather['visibility']), 
+                'weather': weather['name'],
                 'places': self.current_hex.get_places(),
                 'scenery': self.current_hex.get_scenery()
                 }
-
