@@ -12,6 +12,7 @@ temperate forest:
   - A vine-choked thicket
   - A huge fallen tree
   - A maze of thorn-bushes
+  view distance: 1
 hills:
   weather:
   - name: Rain
@@ -26,3 +27,4 @@ hills:
   - A steep-sided gully
   - An exposed hilltop
   - A valley of wind-twisted bushes
+  view distance: 2
