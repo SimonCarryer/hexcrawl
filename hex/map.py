@@ -40,7 +40,7 @@ class Map:
         neighbour, direction = choice([neighbour for neighbour in self.neighbours()])
         encounter['monsters'] = neighbour.get_encounter()
         encounter['notes'] = 'Wandering from %s' % direction
-        encounter['location'] = self.current_hex.get_location()
+        encounter['location'] = self.current_hex.get_scenery()
         return encounter
     
     def encounter(self):
@@ -49,7 +49,7 @@ class Map:
         else:
             encounter = {}
             encounter['monsters'] = self.current_hex.get_encounter()
-            encounter['location'] = self.current_hex.get_location()
+            encounter['location'] = self.current_hex.get_scenery()
         return encounter
 
     def visible_terrain(self):

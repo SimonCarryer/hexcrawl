@@ -30,11 +30,6 @@ class Hex:
             locations += history_tags[history_type]['landmarks']
         return choice(locations)
 
-    def get_location(self):
-        terrain = choice(self.terrain)
-        location = choice(terrain_tags[terrain]['terrain features'])
-        return location
-
     def get_encounter(self):
         monster_list = environment_tags[choice(self.environment)]
         encounter = Encounter(self.challenge)
@@ -85,8 +80,6 @@ class Hex:
         for terrain in self.terrain:
             if terrain_tags[terrain]['view distance'] + view_distance > abs_distance:
                 yield (terrain, abs_distance, self.direction(distance))
-
-
 
 
 
