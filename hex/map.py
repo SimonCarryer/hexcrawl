@@ -28,5 +28,7 @@ class Map:
 
     def look(self):
         return {'terrain': self.current_hex.terrain, 
-                'weather': self.current_hex.get_weather()['name']}
+                'weather': self.current_hex.get_weather()['name'],
+                'places': self.current_hex.get_places()
+                }
 

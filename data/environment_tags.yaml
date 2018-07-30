@@ -7,17 +7,17 @@ goblin tribes:
   appearing: [1, 1]
   role: leader
   occurrence: uncommon
-- Name: Brown Bear
-  appearing: [1, 3]
+- Name: Wolf
+  appearing: [1, 6]
   role: pet
   occurrence: uncommon
-- Name: Giant Wolf Spider
-  appearing: [1, 2]
+- Name: Giant Rat
+  appearing: [1, 12]
   role: pet
-  occurrence: rare
+  occurrence: uncommon
 - Name: Worg
   appearing: [1, 1]
-  occurrence: uncommon
+  occurrence: rare
   role: pet
 
 temperate forest:
