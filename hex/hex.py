@@ -1,6 +1,6 @@
 from encounters import Encounter
 from places import Place
-from dictionaries import environment_tags, terrain_tags
+from dictionaries import environment_tags, terrain_tags, history_tags
 from random import choice
 from numpy.random import choice as np_choice
 
@@ -12,6 +12,8 @@ class Hex:
                 setattr(self, key, dictionary[key])
         for key in kwargs:
             setattr(self, key, kwargs[key])
+        if not hasattr(self, 'history'):
+            self.history = []
         if hasattr(self, 'place_names'):
             places = {}
             for place_name in self.place_names:
@@ -19,6 +21,14 @@ class Hex:
             self.places = places
         else:
             self.places = {}
+
+    def get_scenery(self):
+        locations = []
+        for terrain_type in self.terrain:
+            locations += terrain_tags[terrain_type]['terrain features']
+        for history_type in self.history:
+            locations += history_tags[history_type]['landmarks']
+        return choice(locations)
 
     def get_encounter(self):
         terrain = choice(self.terrain)

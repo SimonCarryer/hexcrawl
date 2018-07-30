@@ -1,8 +1,11 @@
 war graves:
-  type: dungeon
+  type: ruins
   name: The War Graves
-  style: tomb
   inhabitants: [haunted]
-  rumours: [The graves of soldiers killed in the war, Some soldiers were buried with their wealth]
+  rumours: [The graves of soldiers killed in the early days of the war, Some soldiers were buried with their wealth]
   infamy: local
-  level: 1
+  challenge: 2
+  dungeon:
+    style: dungeon
+    purpose: tomb
+    challenge: 2

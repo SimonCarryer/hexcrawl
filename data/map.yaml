@@ -10,6 +10,7 @@
   challenge: 2
   terrain: [temperate forest]
   environment: [temperate forest, haunted]
+  history: [lost lands]
   place_names: [war graves]
 - coords: [1, 0]
   challenge: 1
