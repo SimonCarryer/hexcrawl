@@ -1,6 +1,6 @@
 from dungeons import Dungeon
 
-dungeon = Dungeon()
+dungeon = Dungeon({'style': 'tomb'})
 
 dungeon.base_dungeon()
 

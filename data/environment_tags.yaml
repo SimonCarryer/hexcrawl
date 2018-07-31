@@ -1,135 +1,170 @@
 goblin tribes:
-- Name: Goblin
-  appearing: [1, 20]
-  role: troops
-  occurrence: common
-- Name: Goblin Boss
-  appearing: [1, 1]
-  role: leader
-  occurrence: uncommon
-- Name: Wolf
-  appearing: [1, 6]
-  role: pet
-  occurrence: uncommon
-- Name: Giant Rat
-  appearing: [1, 12]
-  role: pet
-  occurrence: uncommon
-- Name: Worg
-  appearing: [1, 1]
-  occurrence: rare
-  role: pet
+  wandering: True
+  signs:
+    - Skulls mounted on poles.
+    - War-drums sounding in the distance.
+    - Crudely-butchered carcasses left to rot.
+  monsters:
+    - Name: Goblin
+      appearing: [1, 20]
+      role: troops
+      occurrence: common
+    - Name: Goblin Boss
+      appearing: [1, 1]
+      role: leader
+      occurrence: uncommon
+    - Name: Wolf
+      appearing: [1, 6]
+      role: pet
+      occurrence: uncommon
+    - Name: Giant Rat
+      appearing: [1, 12]
+      role: pet
+      occurrence: uncommon
+    - Name: Worg
+      appearing: [1, 1]
+      occurrence: rare
+      role: pet
 
 temperate forest:
-- Name: Panther
-  appearing: [1, 1]
-  occurrence: common
-- Name: Wolf
-  appearing: [1, 12]
-  occurrence: common
-- Name: Giant Owl
-  occurrence: rare
-  role: environmental hazard
-  appearing: [1, 1]
-- Name: Giant Owl
-  occurrence: uncommon
-  appearing: [1, 1]
-- Name: Stirge
-  appearing: [1, 20]
-  occurrence: common
-- Name: Brown Bear
-  appearing: [1, 2]
-  occurrence: uncommon
-- Name: Black Bear
-  appearing: [1, 2]
-  occurrence: common
-- Name: Giant Wolf Spider
-  appearing: [1, 2]
-  occurrence: uncommon
-- Name: Giant Badger
-  appearing: [1, 4]
-  occurrence: uncommon
-- Name: Giant Wasp
-  appearing: [1, 20]
-  occurrence: uncommon
-- Name: Giant Spider
-  appearing: [1, 1]
-  occurrence: common
-- Name: Giant Boar
-  appearing: [1, 1]
-  occurrence: common
-- Name: Giant Elk
-  appearing: [1, 20]
-  occurrence: rare
-- Name: Swarm of Ravens
-  appearing: [1, 3]
-  occurrence: uncommon
-  role: environmental hazard
-- Name: Swarm of Ravens
-  appearing: [1, 3]
-  occurrence: common
-- Name: Displacer Beast
-  appearing: [1, 2]
-  occurrence: uncommon
-- Name: Dire Wolf
-  appearing: [1, 12]
-  occurrence: common
-- Name: Basilisk
-  appearing: [1, 1]
-  occurrence: uncommon
+  wandering: True
+  signs:
+    - Tracks in the woods
+    - Snarling in the night
+  monsters:
+    - Name: Panther
+      appearing: [1, 1]
+      occurrence: common
+    - Name: Wolf
+      appearing: [1, 12]
+      occurrence: common
+    - Name: Giant Owl
+      occurrence: rare
+      role: environmental hazard
+      appearing: [1, 1]
+    - Name: Giant Owl
+      occurrence: uncommon
+      appearing: [1, 1]
+    - Name: Stirge
+      appearing: [1, 20]
+      occurrence: common
+    - Name: Brown Bear
+      appearing: [1, 2]
+      occurrence: uncommon
+    - Name: Black Bear
+      appearing: [1, 2]
+      occurrence: common
+    - Name: Giant Wolf Spider
+      appearing: [1, 2]
+      occurrence: uncommon
+    - Name: Giant Badger
+      appearing: [1, 4]
+      occurrence: uncommon
+    - Name: Giant Wasp
+      appearing: [1, 20]
+      occurrence: uncommon
+    - Name: Giant Spider
+      appearing: [1, 1]
+      occurrence: common
+    - Name: Giant Boar
+      appearing: [1, 1]
+      occurrence: common
+    - Name: Giant Elk
+      appearing: [1, 20]
+      occurrence: rare
+    - Name: Swarm of Ravens
+      appearing: [1, 3]
+      occurrence: rare
+      role: environmental hazard
+    - Name: Swarm of Ravens
+      appearing: [1, 3]
+      occurrence: common
+    - Name: Displacer Beast
+      appearing: [1, 2]
+      occurrence: uncommon
+    - Name: Dire Wolf
+      appearing: [1, 12]
+      occurrence: common
+    - Name: Basilisk
+      appearing: [1, 1]
+      occurrence: uncommon
 
 wolf packs:
-- Name: Wolf
-  appearing: [1, 12]
-  occurrence: common
-  role: troops
-- Name: Worg
-  appearing: [1, 1]
-  occurrence: uncommon
-  role: leader
-- Name: Worg
-  appearing: [1, 12]
-  occurrence: uncommon
-  role: troops
-- Name: Dire Wolf
-  appearing: [1, 1]
-  role: leader
-  occurrence: common
-- Name: Dire Wolf
-  appearing: [1, 12]
-  role: troops
-  occurrence: common
-- Name: Werewolf
-  appearing: [1, 1]
-  role: leader
-  occurrence: rare
+  wandering: True
+  signs:
+    - Howling at the moon.
+    - Scratch marks in trees.
+    - Scent marking on rocks.
+  monsters:
+    - Name: Wolf
+      appearing: [1, 12]
+      occurrence: common
+      role: troops
+    - Name: Worg
+      appearing: [1, 1]
+      occurrence: uncommon
+      role: leader
+    - Name: Worg
+      appearing: [1, 12]
+      occurrence: uncommon
+      role: troops
+    - Name: Dire Wolf
+      appearing: [1, 1]
+      role: leader
+      occurrence: common
+    - Name: Dire Wolf
+      appearing: [1, 12]
+      role: troops
+      occurrence: common
+    - Name: Werewolf
+      appearing: [1, 1]
+      role: leader
+      occurrence: rare
 
 haunted:
-- Name: Ghoul
-  appearing: [1, 20]
-  occurrence: uncommon
-- Name: Skeleton
-  appearing: [1, 20]
-  occurrence: common
-- Name: Crawling Claw
-  appearing: [1, 20]
-  occurrence: uncommon
-  role: environmental hazard
+  wandering: False
+  signs:
+    - A chill in the air.
+    - Strange mounds in the earth.
+    - Old grave-markers.
+  monsters:
+    - Name: Ghoul
+      appearing: [1, 20]
+      occurrence: uncommon
+    - Name: Skeleton
+      appearing: [1, 20]
+      occurrence: common
+    - Name: Crawling Claw
+      appearing: [1, 20]
+      occurrence: rare
+      role: environmental hazard
+    - Name: Shadow
+      appearing: [1, 20]
+      occurrence: common
+    - Name: Wight
+      appearing: [1, 20]
+      occurrence: common
 
 bandits:
-- Name: Bandit/Pirate
-  appearing: [1, 20]
-  role: troops
-  occurrence: common
-- Name: Thug
-  appearing: [1, 20]
-  role: troops
-  occurrence: common
-- Name: Bandit/Pirate Captain
-  appearing: [1, 1]
-  role: leader
-  occurrence: common
-- Name: Spy
-  appearing: [1, 1]
-  role: troops
-  occurrence: uncommon
+  wandering: True
+  signs:
+    - Tracks in the woods.
+    - Traps and snares.
+    - A cache of weapons and food.
+  monsters:
+    - Name: Bandit/Pirate
+      appearing: [1, 20]
+      role: troops
+      occurrence: common
+    - Name: Thug
+      appearing: [1, 20]
+      role: troops
+      occurrence: common
+    - Name: Bandit/Pirate Captain
+      appearing: [1, 1]
+      role: leader
+      occurrence: common
+    - Name: Spy
+      appearing: [1, 1]
+      role: troops
+      occurrence: uncommon

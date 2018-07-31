@@ -20,7 +20,7 @@ def load_environment_tags():
         environment_tags = yaml.load(f.read())
     for tag in environment_tags.keys():
         amended_monsters = []
-        for monster in environment_tags[tag]:
+        for monster in environment_tags[tag]['monsters']:
             monster_data = monster_dict.get(monster['Name'])
             if monster_data is not None:
                 merged_data = {**monster, **monster_data}
@@ -30,7 +30,7 @@ def load_environment_tags():
                 amended_monsters.append(merged_data)
             else:
                 print('uh oh!')
-        environment_tags[tag] = amended_monsters
+        environment_tags[tag]['monsters'] = amended_monsters
     return environment_tags
             
             

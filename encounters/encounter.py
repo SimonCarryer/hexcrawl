@@ -2,9 +2,7 @@ import numpy as np
 import yaml
 import bisect
 from collections import defaultdict
-
-with open('data/xp_values.yaml') as f:
-    xp_values = yaml.load(f.read())
+from dictionaries import xp_values
 
 class Encounter:
     def __init__(self, encounter_level):

@@ -10,7 +10,7 @@ class Place:
             setattr(self, key, places[name][key])
 
     def get_encounter(self):
-        monster_list = environment_tags[choice(self.inhabitants)]
+        monster_list = environment_tags[choice(self.inhabitants)]['monsters']
         encounter = Encounter(self.challenge)
         encounter.pick_monsters(monster_list)
         return encounter.display()
@@ -19,3 +19,6 @@ class Place:
         return {'description': self.description,
                 'dungeons': self.dungeons,
                 'encounter': self.get_encounter()}
+            
+    def get_rumours(self):
+        return choice(self.rumours)

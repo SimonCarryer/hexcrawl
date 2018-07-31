@@ -12,13 +12,13 @@ class Map:
         for hex_data in hexes:
             self.hexes.append(Hex(hex_data))
         self.current_hex = self.get_hex_by_coords([0, 0])
-        self.directions = {'n': [1, 1], 's': [-1, -1], 'ne': [1, 0], 'se': [-1, 0], 'nw': [0, 1], 'sw': [-1, 0]}
+        self.directions = {'n': [1, 1], 's': [-1, -1], 'ne': [1, 0], 'se': [0, -1], 'nw': [0, 1], 'sw': [-1, 0], 'e': [1, -1], 'w': [-1, 1]}
         self.reversed_directions = {tuple(value): key for key, value in self.directions.items()}
 
     def get_hex_by_coords(self, coords):
-        for hex in self.hexes:
-            if hex.coords == coords:
-                return hex
+        for hex_ in self.hexes:
+            if hex_.coords == coords:
+                return hex_
         raise HexNotFoundError
 
     def neighbours(self):
@@ -58,11 +58,26 @@ class Map:
                 for terrain in hex_.visible_terrain(self.current_hex.coords, visibility):
                     yield terrain
 
+    def signs(self):
+        return self.current_hex.get_signs()
+
+    def rumours(self):
+        for hex_ in self.hexes:
+            yield hex_.rumours(self.current_hex.coords)
+
     def parse_visible_terrain(self, visibility):
         parsed = defaultdict(set)
         visible = [terrain for terrain in self.visible_terrain(visibility)]
         for terrain, distance, direction in visible:
             parsed[self.reversed_directions[direction]].add((terrain, distance))
+        return dict(parsed)
+
+    def parse_rumours(self):
+        parsed = defaultdict(set)
+        rumours = [rumour for rumour in self.rumours()]
+        for rumour_set in rumours:
+            for name, rumour, distance, direction in rumour_set:
+                parsed[self.reversed_directions[direction]].add((name, rumour, distance))
         return dict(parsed)
 
     def look(self):
@@ -71,5 +86,7 @@ class Map:
                 'visible': self.parse_visible_terrain(weather['visibility']), 
                 'weather': weather['name'],
                 'places': self.current_hex.get_places(),
-                'scenery': self.current_hex.get_scenery()
+                'scenery': self.current_hex.get_scenery(),
+                'rumours': self.parse_rumours(),
+                'signs': self.signs()
                 }

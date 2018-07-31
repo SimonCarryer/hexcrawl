@@ -2,10 +2,12 @@
   challenge: 1
   terrain: [temperate forest]
   environment: [temperate forest]
+  history: [lost lands]
 - coords: [0, 1]
   challenge: 1
   terrain: [temperate forest]
   environment: [temperate forest, bandits]
+  history: [lost lands]
 - coords: [1, 1]
   challenge: 2
   terrain: [temperate forest]
@@ -16,19 +18,30 @@
   challenge: 1
   terrain: [temperate forest]
   environment: [temperate forest]
+  history: [lost lands]
 - coords: [1, 2]
   challenge: 2
   terrain: [hills]
   environment: [temperate forest, bandits]
+  place_names: [bandit lair]
+  history: [lost lands]
+- coords: [2, 3]
+  challenge: 3
+  terrain: [hills, temperate forest]
+  environment: [goblin tribes]
+  history: [lost lands]
 - coords: [2, 2]
   challenge: 3
-  terrain: [temperate forest]
+  terrain: [hills]
   environment: [temperate forest, wolf packs]
+  history: [lost lands]
 - coords: [2, 1]
   challenge: 2
   terrain: [temperate forest]
-  environment: [temperate forest, haunted]
+  environment: [temperate forest]
+  history: [lost lands]
 - coords: [2, 0]
   challenge: 2
   terrain: [temperate forest]
   environment: [temperate forest, bandits]
+  history: [lost lands]

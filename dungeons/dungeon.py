@@ -40,12 +40,12 @@ class Dungeon:
         self.graph = dungeon
 
     def fix_unjoined_areas(self, dungeon):
-        connected_components = [i for i in nx.connected_components(self.graph)]
+        connected_components = [i for i in nx.connected_components(dungeon)]
         if len(connected_components) > 1:
             for idx in range(len(connected_components)-1):
                 room = random.sample(connected_components[idx], 1)[0]
                 connecting_room = random.sample(connected_components[idx+1], 1)[0]
-                self.graph.add_edge(room, connecting_room, style='dashed', weight=2)
+                dungeon.add_edge(room, connecting_room, style='dashed', weight=2)
 
     def label_secret_areas(self, dungeon):
         connected_components = [i for i in nx.connected_components(dungeon)]

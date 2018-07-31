@@ -3,11 +3,26 @@ war graves:
   name: The War Graves
   description: A huge graveyard, overgrown with weeds and gnarled trees, the graves torn up and plundered.
   inhabitants: [haunted]
-  rumours: [The graves of soldiers killed in the early days of the war, Some soldiers were buried with their wealth]
-  infamy: local
+  rumours: [The graves of soldiers killed in the early days of the war, Some soldiers were buried with their wealth, The King's son was buried in the War Graves in an elaborate tomb]
+  infamy: 3
   challenge: 2
+  visibility: 1
   dungeons:
     - name: Prince's Tomb
       style: dungeon
       purpose: tomb
+      challenge: 2
+
+bandit lair:
+  type: hideout
+  name: Bandit Lair
+  description: Badly-covered trails lead to a darkened cave-mouth. Outside are camp-fires, boxes of goods, and posts for tying up mules and horses.
+  inhabitants: [bandits]
+  rumours: [Bandits have a hideout in the forest where they stash their loot, The bandits make sure their hideout is well-defended]
+  infamy: 2
+  challenge: 2
+  visibility: 0
+  dungeons:
+    - name: Bandit Lair
+      style: caves
       challenge: 2
