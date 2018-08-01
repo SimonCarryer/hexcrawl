@@ -101,4 +101,3 @@ class Hex:
                 yield (name, place.get_rumours(), abs_distance, self.direction(distance))
 
 
-

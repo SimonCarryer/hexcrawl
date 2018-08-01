@@ -3,6 +3,7 @@ import matplotlib as mpl
 mpl.use('TkAgg')
 import matplotlib.pyplot as plt
 import random
+from dictionaries import dungeon_rooms
 
 dungeon_styles = {'caves': {'connectivity': 1.0, 'rooms': (2, 5), 'class': 'natural', 'colour': 'r'},
                   'dungeon': {'connectivity': 1.2, 'rooms': (4, 8), 'class': 'built', 'colour': 'b'},
@@ -36,7 +37,7 @@ class Dungeon:
             dungeon.add_edge(rooms[0], rooms[1], style='solid', weight=1)
         self.label_secret_areas(dungeon)
         self.fix_unjoined_areas(dungeon)
-        #label_nodes(dungeon)
+        self.assign_rooms(dungeon)
         self.graph = dungeon
 
     def fix_unjoined_areas(self, dungeon):
@@ -54,6 +55,20 @@ class Dungeon:
                 if len(component) != max([len(i) for i in connected_components]):
                     for node in component:
                         dungeon.node[node]['tags'].append('secret')
+
+    def choose_room(self, node):
+        rooms = dungeon_rooms[node['purpose']]
+        suitable_rooms = [room for room in rooms if node['tags'] == [] or any([tag in room.get('tags', []) for tag in node['tags']])]
+        return random.choice(suitable_rooms)
+
+    def assign_rooms(self, dungeon):
+        nodes = dungeon.nodes(data=True)
+        rooms = dungeon_rooms[purpose]
+        used_rooms = []
+        for a, node in nodes:
+            room = choose_room(node)
+            node['room'] = room['description']
+            used_rooms.append(room['room_id'])
 
     def save_dungeon_image(self):
         colours = [i[1]['colour'] for i in self.graph.nodes(data=True)]
