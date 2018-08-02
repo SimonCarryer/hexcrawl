@@ -5,10 +5,10 @@ import matplotlib.pyplot as plt
 import random
 from dictionaries import dungeon_rooms
 
-dungeon_styles = {'caves': {'connectivity': 1.0, 'rooms': (2, 5), 'class': 'natural', 'colour': 'r'},
-                  'dungeon': {'connectivity': 1.2, 'rooms': (4, 8), 'class': 'built', 'colour': 'b'},
-                  'tunnels': {'connectivity': 1.8, 'rooms': (3, 6), 'class': 'built', 'colour': 'g'},
-                  'tomb': {'connectivity': 0.5, 'rooms': (2, 3), 'class': 'built', 'colour': 'black'}
+dungeon_styles = {'caves': {'connectivity': 1.0, 'rooms': (2, 5), 'class': 'natural', 'colour': 'r', 'secrets': 0},
+                  'dungeon': {'connectivity': 1.2, 'rooms': (4, 8), 'class': 'built', 'colour': 'b', 'secrets': 1},
+                  'tunnels': {'connectivity': 1.8, 'rooms': (3, 6), 'class': 'built', 'colour': 'g', 'secrets': 0},
+                  'tomb': {'connectivity': 0.6, 'rooms': (3, 4), 'class': 'built', 'colour': 'black', 'secrets': 2}
                  }
 
 class Dungeon:
@@ -22,6 +22,7 @@ class Dungeon:
             self.style = 'dungeon'
         if not hasattr(self, 'purpose'):
             self.purpose = random.choice(['tomb', 'stronghold'])
+        self.used_rooms = []
 
     def base_dungeon(self, initial_room=0):
         dungeon = nx.Graph()
@@ -35,10 +36,22 @@ class Dungeon:
         while nx.average_node_connectivity(dungeon) < threshold:
             rooms = random.sample(dungeon.nodes(), 2)
             dungeon.add_edge(rooms[0], rooms[1], style='solid', weight=1)
+        self.add_secrets(dungeon)
         self.label_secret_areas(dungeon)
         self.fix_unjoined_areas(dungeon)
+        self.tag_nodes(dungeon)
         self.assign_rooms(dungeon)
         self.graph = dungeon
+
+    def add_secrets(self, dungeon):
+        if random.randint(1, 6) <= dungeon_styles[self.style]['secrets']:
+            max_nodes = len(dungeon.nodes())
+            colour = dungeon_styles[self.style]['colour']
+            class_ = dungeon_styles[self.style]['class']
+            dungeon.add_node(max_nodes, colour=colour, class_=class_, style=self.style, purpose=self.purpose, tags=[])
+            if random.randint(1, 6) in [1, 2, 3]:
+                dungeon.add_node(max_nodes+1, colour=colour, class_=class_, style=self.style, purpose=self.purpose, tags=[])
+                dungeon.add_edge(max_nodes, max_nodes+1, style='solid', weight=1)
 
     def fix_unjoined_areas(self, dungeon):
         connected_components = [i for i in nx.connected_components(dungeon)]
@@ -56,29 +69,69 @@ class Dungeon:
                     for node in component:
                         dungeon.node[node]['tags'].append('secret')
 
+    def label_edges(self, dungeon):
+        biconnected_component_edges = nx.biconnected_component_edges(dungeon)
+        for edge, edge_data in dungeon.edges(data=True):
+            if edge in biconnected_component_edges:
+                edge_data['important'] = True
+
+
+    def tag_nodes(self, dungeon):
+        nodes = [(node, data) for node, data in dungeon.nodes(data=True) if 'secret' not in data['tags']]
+        central_nodes = [i for i in nx.articulation_points(dungeon)]
+        paths = {a: len(nx.shortest_path(dungeon, 0, a)) for a, node in nodes}
+        max_path = max(paths.values())
+        for a, node in nodes:
+            if a == 0:
+                node['tags'].append('entrance')
+            if a in central_nodes:
+                node['tags'].append('central')
+            if paths[a] == max_path:
+                node['tags'].append('important')
+            if len(dungeon.neighbors(a)) == 1:
+                node['tags'].append('dead-end')
+
     def choose_room(self, node):
         rooms = dungeon_rooms[node['purpose']]
-        suitable_rooms = [room for room in rooms if node['tags'] == [] or any([tag in room.get('tags', []) for tag in node['tags']])]
-        return random.choice(suitable_rooms)
+        if len(node.get('tags', [])) > 0:
+            suitable_rooms = [room for room in rooms if any([tag in room.get('tags', []) for tag in node['tags']])]
+        else:
+            suitable_rooms = [room for room in rooms if room.get('tags', []) == [] or not any([i not in room.get('tags', []) for i in ['secret', 'important']])]
+        final = [room for room in suitable_rooms if room['room_id'] not in self.used_rooms]
+        if len(final) > 0:
+            room = random.choice(final)
+        elif len(suitable_rooms) > 0:
+            room = random.choice(suitable_rooms)
+        else:
+            room = random.choice(rooms)
+        self.used_rooms.append(room['room_id'])
+        return room
 
     def assign_rooms(self, dungeon):
         nodes = dungeon.nodes(data=True)
-        rooms = dungeon_rooms[purpose]
-        used_rooms = []
         for a, node in nodes:
-            room = choose_room(node)
+            room = self.choose_room(node)
             node['room'] = room['description']
-            used_rooms.append(room['room_id'])
+
+    def write_module(self):
+        nodes = self.graph.nodes(data=True)
+        for number, node in nodes:
+            print(number, node['room'])
 
     def save_dungeon_image(self):
+        self.write_module()
         colours = [i[1]['colour'] for i in self.graph.nodes(data=True)]
-        styles = [i[2]['style'] for i in self.graph.edges(data=True)]
+        styles = [c['style'] for a, b, c in self.graph.edges(data=True)]
         edges = {(a, b): 'a' for a, b, c in self.graph.edges(data=True) if c['style'] == 'dashed'}
         pos = nx.spring_layout(self.graph) 
         nx.draw_networkx_edges(self.graph, 
                             pos,
-                            styles=styles,
-                            edge_labels=edges)
+                            style='dashed',
+                            edgelist=[(a, b) for a, b, c in self.graph.edges(data=True) if c['style'] == 'dashed'])
+        nx.draw_networkx_edges(self.graph, 
+                            pos,
+                            style='solid',
+                            edgelist = [(a, b) for a, b, c in self.graph.edges(data=True) if c['style'] == 'solid'])
         nx.draw_networkx_nodes(self.graph, 
                             pos,
                             node_color=colours)

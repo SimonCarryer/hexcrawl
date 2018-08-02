@@ -33,7 +33,10 @@ class Map:
         current = self.current_hex.coords
         change = self.directions[direction]
         desired = [sum(x) for x in zip(current, change)]
-        self.current_hex = self.get_hex_by_coords(desired)
+        try:
+            self.current_hex = self.get_hex_by_coords(desired)
+        except HexNotFoundError:
+            print("You can't go that way - there's nothing there.")
 
     def neighbouring_encounter(self):
         encounter = {}

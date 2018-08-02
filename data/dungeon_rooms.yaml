@@ -1,9 +1,9 @@
 stronghold:
 - description: Antechamber where visitors seeking access to the stronghold wait
-  tags: [central]
+  tags: [entrance]
 - description: Armory holding high-quality gear, including light siege weapons such as ballistas
 - description: Audience chamber used by the master of the stronghold to receive visitors
-  tags: [central]
+  tags: [central, entrance]
 - description: Aviary or zoo for keeping exotic creatures
   tags: [rare]
 - description: Banquet room for hosting celebrations and guests
@@ -12,15 +12,17 @@ stronghold:
 - description: Bath outfitted with a marble floor and other luxurious accoutrements
   tags: [rare]
 - description: Bedroom for use by the stronghold's master or important guests
+  tags: [important]
 - description: Chapel dedicated to a deity associated with the stronghold's master
 - description: Cistern providing drinking water
 - description: Dining room for intimate gatherings or informal meals
   tags: [rare]
 - description: Dressing room featuring a number of wardrobes
 - description: Gallery for the display of expensive works of art and trophies
-  tags: [rare]
+  tags: [rare, entrance]
 - description: Game room used to entertain visitors
 - description: Guardroom
+  tags: [entrance]
 - description: Kennel where monsters or trained animals that protect the stronghold are kept
   tags: [rare]
 - description: Kitchen designed to prepare exotic foods for large numbers of guests
@@ -29,6 +31,9 @@ stronghold:
 - description: Library with forbidden and dangerous books
   tags: [rare, secret]
 - description: Lounge used to entertain guests
+  tags: [entrance]
+- description: Shrine to a forbidden or evil deity, worshipped in secret
+  tags: [rare, secret]
 - description: Pantry, including cellar for wine or spirits
 - description: Sitting room for family and intimate guests
 - description: Storage for mundane goods and supplies
@@ -38,7 +43,7 @@ stronghold:
 - description: Throne room, elaborately decorated
   tags: [important]
 - description: Waiting room where lesser guests are held before receiving an audience
-  tags: [central]
+  tags: [central, entrance]
 - description: Latrine or bath
 - description: Crypt belonging to the stronghold's master or someone else of importance
   tags: [secret]
@@ -46,7 +51,9 @@ stronghold:
 tomb:
 - description: Workshop for embalming the dead 
 - description: Antechamber for those that have come to pay respect to the dead or prepare themselves for burial rituals
+  tags: [entrance]
 - description: Chapel dedicated to deities that watch over the dead and protect their resting places
+  tags: [central]
 - description: Crypt for less important burials
   tags: [central]
 - description: Divination room, used in rituals to contact the dead for guidance
@@ -57,13 +64,14 @@ tomb:
 - description: Grand crypt for a noble, high priest, or other important individual
   tags: [important]
 - description: Guardroom, usually guarded by undead, constructs, or other creatures that don't need to eat or sleep
-  tags: [central]
+  tags: [central, entrance]
 - description: Robing room for priests to prepare for burial rituals
+  tags: [entrance]
 - description: Storage, stocked with tools for maintaining the tomb and preparing the dead for burial
 - description: Tomb where the wealthiest and most important folk are interred , protected by secret doors and traps
-  tags: [central]
+  tags: [secret]
 - description: Workshop for embalming the dead 
 - description: Burial chamber for excommunicated or shameful dead
   tags: [secret]
-- description: Treasure room holding goods to ccompany the dead in the afterlife
+- description: Treasure room holding goods to accompany the dead in the afterlife
   tags: [secret]
