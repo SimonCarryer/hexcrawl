@@ -4,11 +4,12 @@ mpl.use('TkAgg')
 import matplotlib.pyplot as plt
 import random
 from dictionaries import dungeon_rooms
+from .dungeon_populator import DungeonPopulator
 
-dungeon_styles = {'caves': {'connectivity': 1.0, 'rooms': (2, 5), 'class': 'natural', 'colour': 'r', 'secrets': 0},
-                  'dungeon': {'connectivity': 1.2, 'rooms': (4, 8), 'class': 'built', 'colour': 'b', 'secrets': 1},
-                  'tunnels': {'connectivity': 1.8, 'rooms': (3, 6), 'class': 'built', 'colour': 'g', 'secrets': 0},
-                  'tomb': {'connectivity': 0.6, 'rooms': (3, 4), 'class': 'built', 'colour': 'black', 'secrets': 2}
+dungeon_styles = {'caves': {'connectivity': 1.0, 'rooms': (3, 5), 'class': 'natural', 'secrets': 0},
+                  'dungeon': {'connectivity': 1.2, 'rooms': (4, 8), 'class': 'built', 'secrets': 1},
+                  'tunnels': {'connectivity': 1.8, 'rooms': (3, 6), 'class': 'built', 'secrets': 0},
+                  'tomb': {'connectivity': 0.6, 'rooms': (3, 4), 'class': 'built', 'secrets': 2}
                  }
 
 class Dungeon:
@@ -23,12 +24,13 @@ class Dungeon:
         if not hasattr(self, 'purpose'):
             self.purpose = random.choice(['tomb', 'stronghold'])
         self.used_rooms = []
+        self.colour = 'black'
 
     def base_dungeon(self, initial_room=0):
         dungeon = nx.Graph()
         rooms_min, rooms_max = dungeon_styles[self.style]['rooms']
         threshold = dungeon_styles[self.style]['connectivity']
-        colour = dungeon_styles[self.style]['colour']
+        colour = self.colour
         class_ = dungeon_styles[self.style]['class']
         n_rooms = random.randint(rooms_min, rooms_max)
         for i in range(initial_room, initial_room+n_rooms):
@@ -41,12 +43,13 @@ class Dungeon:
         self.fix_unjoined_areas(dungeon)
         self.tag_nodes(dungeon)
         self.assign_rooms(dungeon)
+        self.populate_dungeon(dungeon)
         self.graph = dungeon
 
     def add_secrets(self, dungeon):
         if random.randint(1, 6) <= dungeon_styles[self.style]['secrets']:
             max_nodes = len(dungeon.nodes())
-            colour = dungeon_styles[self.style]['colour']
+            colour = self.colour
             class_ = dungeon_styles[self.style]['class']
             dungeon.add_node(max_nodes, colour=colour, class_=class_, style=self.style, purpose=self.purpose, tags=[])
             if random.randint(1, 6) in [1, 2, 3]:
@@ -113,10 +116,14 @@ class Dungeon:
             room = self.choose_room(node)
             node['room'] = room['description']
 
+    def populate_dungeon(self, dungeon):
+        populator = DungeonPopulator(dungeon)
+        populator.populate()
+
     def write_module(self):
         nodes = self.graph.nodes(data=True)
         for number, node in nodes:
-            print(number, node['room'])
+            print(number, node['room'], node.get('encounter', ''))
 
     def save_dungeon_image(self):
         self.write_module()

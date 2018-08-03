@@ -44,6 +44,8 @@ class Encounter:
             return True
         if monster['role'] == 'troops':
             return True
+        if monster['role'] == 'elite':
+            return (self.role_counts['elite'] == 0 or self.monster_counts[monster['Name']] > 0) and self.role_counts['elite'] < self.role_counts['troops']
         if monster['role'] == 'natural hazard':
             return sum(self.monster_counts.values()) == 0 or self.monster_counts[monster['Name']] > 0
         if monster['role'] == 'leader':
@@ -72,7 +74,7 @@ class Encounter:
         return adjustment * monster_xp
 
     def pick_monsters(self, monster_list):
-        monster_min = 0 
+        monster_min = 0
         possibles = self.possible_monsters(monster_list)
         if len(possibles) == 0:
             print('No appropriate monsters available')

@@ -25,6 +25,10 @@ goblin tribes:
       appearing: [1, 1]
       occurrence: rare
       role: pet
+    - Name: Bugbear
+      appearing: [1, 6]
+      occurrence: uncommon
+      role: elite
 
 temperate forest:
   wandering: True
@@ -166,5 +170,5 @@ bandits:
       occurrence: common
     - Name: Spy
       appearing: [1, 1]
-      role: troops
+      role: elite
       occurrence: uncommon
