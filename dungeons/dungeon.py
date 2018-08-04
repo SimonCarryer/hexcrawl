@@ -91,7 +91,7 @@ class Dungeon:
                 node['tags'].append('central')
             if paths[a] == max_path:
                 node['tags'].append('important')
-            if len(dungeon.neighbors(a)) == 1:
+            if len([i for i in dungeon.neighbors(a)]) == 1:
                 node['tags'].append('dead-end')
 
     def choose_room(self, node):

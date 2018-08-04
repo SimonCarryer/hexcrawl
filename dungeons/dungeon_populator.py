@@ -53,11 +53,15 @@ class DungeonPopulator:
                 encounter.pick_monsters(self.monsters)
                 node['encounter'] = encounter.display()
             elif a == 0:
-                pass
-                # guards
+                encounter = DirectedEncounter(self.level, style='guards')
+                encounter.pick_monsters(self.monsters)
+                node['encounter'] = encounter.display()
             elif a not in main_route:
-                pass
-                # chance of something fancy
+                roll = random.randint(1, 6)
+                if roll > 3:
+                    encounter = DirectedEncounter(self.level, style='elite')
+                    encounter.pick_monsters(self.monsters)
+                    node['encounter'] = encounter.display()
             else:
                 roll = random.randint(1, 6)
                 if roll > 3:
