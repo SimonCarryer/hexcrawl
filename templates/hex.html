@@ -1,0 +1,53 @@
+<!doctype html>
+<section class="content">
+    <body>
+      <p>{{context.scenery}}</p>
+      <p>{{context.signs}}</p>
+      <h3>Local Terrain:</h3>
+      {% for terrain in context.terrain %}
+        <li>{{terrain}}</li>
+        {% endfor %}
+      <h3>Current weather: {{context.weather.name}}</h3>
+      {{context.weather.effect}}
+      <h3>Visible from a good vantage:</h3>
+      {% for visible in context.visible %}
+        <li>To the {{visible.direction}}: {{visible.visible}}</li>
+        {% endfor %}
+        <h3>Rumours</h3>
+        {% for rumour in context.rumours %}
+          <li>To the {{rumour.direction}}: {{rumour.rumour}}</li>
+          {% endfor %}
+        <h3>Places</h3>
+        {% for place in context.places %}
+        <li>{{place}}</li>
+        {% endfor %}
+        <h3>Encounters</h3>
+        {% for encounter in encounters %}
+        <h4>Encounter</h4>
+            {% for monster in encounter.monsters.monsters %}
+            <li>{{monster.name}}: {{monster.number}}</li>
+            {% endfor %}
+            Location: {{encounter.location}}<br>
+            XP: {{encounter.monsters.xp_value}}<br>
+            Notes: {{encounter.notes}}<br>
+          </li>
+          {% endfor %}
+    </body>
+    
+  </section>
+<nav>
+    <h1>Navigation</h1>
+    <h3>Travel</h3>
+    {% for direction in directions %}
+    <form action="/travel/{{direction}}" method="post">
+        <button name="travelBtn" type="submit">{{direction}}</button>
+    </form>
+    {% endfor %}
+    <h3>Exploration</h3>
+    {% for place in context.places %}
+    <form action="/explore/{{place}}" method="get">
+      <button name="exploreBtn" type="submit">{{place}}</button>
+  </form>
+    {% endfor %}    
+  </nav>
+

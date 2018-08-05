@@ -86,7 +86,7 @@ class Encounter:
 
     def display(self):
         values = {}
-        values['monsters'] = {key: value for key, value in self.monster_counts.items() if value > 0}
-        values['xp value'] = self.xp_value
+        values['monsters'] = [{'name': key, 'number': value} for key, value in self.monster_counts.items() if value > 0]
+        values['xp_value'] = self.xp_value
         return values
 

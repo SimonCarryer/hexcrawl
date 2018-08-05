@@ -1,0 +1,21 @@
+<!doctype html>
+<section class="content">
+    <h1>{{context.name}}</h1>
+    {{context.description}}
+    <h3>Encounters</h3>
+        {% for encounter in context.encounter %}
+        <h4>Encounter</h4>
+            {% for monster in encounter.monsters %}
+            <li>{{monster.name}}: {{monster.number}}</li>
+            {% endfor %}
+            XP: {{encounter.xp_value}}<br>
+          </li>
+          {% endfor %}
+</section>
+<nav>
+        <h1>Navigation</h1>
+
+        <form action="/hex/{{return_coords}}" method="get">
+            <button name="returnBtn" type="submit">Back to Hex</button>
+        </form>
+</nav>

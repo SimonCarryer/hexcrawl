@@ -12,7 +12,14 @@ class Map:
         for hex_data in hexes:
             self.hexes.append(Hex(hex_data))
         self.current_hex = self.get_hex_by_coords([0, 0])
-        self.directions = {'n': [1, 1], 's': [-1, -1], 'ne': [1, 0], 'se': [0, -1], 'nw': [0, 1], 'sw': [-1, 0], 'e': [1, -1], 'w': [-1, 1]}
+        self.directions = {'North': [1, 1], 
+                           'South': [-1, -1], 
+                           'North-East': [1, 0], 
+                           'South-East': [0, -1], 
+                           'North-West': [0, 1], 
+                           'South-West': [-1, 0], 
+                           'East': [1, -1], 
+                           'West': [-1, 1]}
         self.reversed_directions = {tuple(value): key for key, value in self.directions.items()}
 
     def get_hex_by_coords(self, coords):
@@ -28,6 +35,20 @@ class Map:
                 yield (self.get_hex_by_coords(coords), direction)
             except HexNotFoundError:
                 pass
+
+    def valid_directions(self):
+        all_directions = ['North', 'South', 'North-East', 'South-East', 'North-West', 'South-West']
+        possible = []
+        current = self.current_hex.coords
+        for direction in all_directions:
+            change = self.directions[direction]
+            desired = [sum(x) for x in zip(current, change)]   
+            try:
+                self.get_hex_by_coords(desired)
+                possible.append(direction)
+            except HexNotFoundError:
+                pass
+        return possible
 
     def change_current_hex(self, direction):
         current = self.current_hex.coords
@@ -55,6 +76,9 @@ class Map:
             encounter['location'] = self.current_hex.get_scenery()
         return encounter
 
+    def get_encounter_set(self, n=3):
+        return [self.encounter() for i in range(n)]
+
     def visible_terrain(self, visibility):
         for hex_ in self.hexes:
             if hex_ != self.current_hex:
@@ -73,7 +97,7 @@ class Map:
         visible = [terrain for terrain in self.visible_terrain(visibility)]
         for terrain, distance, direction in visible:
             parsed[self.reversed_directions[direction]].add((terrain, distance))
-        return dict(parsed)
+        return [{'direction': direction, 'visible': list(visible)} for direction, visible in parsed.items()]
 
     def parse_rumours(self):
         parsed = defaultdict(set)
@@ -81,13 +105,13 @@ class Map:
         for rumour_set in rumours:
             for name, rumour, distance, direction in rumour_set:
                 parsed[self.reversed_directions[direction]].add((name, rumour, distance))
-        return dict(parsed)
+        return [{'direction': direction, 'rumour': list(rumour)} for direction, rumour in parsed.items()]
 
     def look(self):
         weather = self.current_hex.get_weather()
         return {'terrain': self.current_hex.terrain,
                 'visible': self.parse_visible_terrain(weather['visibility']), 
-                'weather': weather['name'],
+                'weather': weather,
                 'places': self.current_hex.get_places(),
                 'scenery': self.current_hex.get_scenery(),
                 'rumours': self.parse_rumours(),

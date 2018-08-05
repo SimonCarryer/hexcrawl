@@ -6,6 +6,7 @@ from encounters import Encounter
 class Place:
     def __init__(self, name):
         super(Place, self)
+        self.name = name.title()
         for key in places[name]:
             setattr(self, key, places[name][key])
 
@@ -16,9 +17,11 @@ class Place:
         return encounter.display()
 
     def explore(self):
-        return {'description': self.description,
+        return {'name': self.name,
+                'description': self.description,
                 'dungeons': self.dungeons,
-                'encounter': self.get_encounter()}
+                'encounter': [self.get_encounter() for i in range(3)]
+                }
             
     def get_rumours(self):
         return choice(self.rumours)
