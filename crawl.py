@@ -10,7 +10,15 @@ while user_input != 'q':
     if user_input == 'e':
         print(current_map.encounter())
     if user_input in ['n', 's', 'ne', 'se', 'nw', 'sw']:
-        current_map.change_current_hex(user_input)
+        dir_dict = {
+            'n': 'North', 
+            's': 'South', 
+            'ne': 'North-East', 
+            'se': 'South-East', 
+            'nw': 'North-West', 
+            'sw': 'South-West'
+        }
+        current_map.change_current_hex(dir_dict[user_input])
         print(current_map.look())
     if user_input == 'l':
         print(current_map.look())
@@ -21,4 +29,3 @@ while user_input != 'q':
         except KeyError:
             print("That's not a place")
 
-#print(encounter.display())

@@ -81,9 +81,15 @@ class Map:
 
     def visible_terrain(self, visibility):
         for hex_ in self.hexes:
-            if hex_ != self.current_hex:
+            if hex_.coords != self.current_hex.coords:
                 for terrain in hex_.visible_terrain(self.current_hex.coords, visibility):
                     yield terrain
+
+    def visible_places(self, visibility):
+        for hex_ in self.hexes:
+            if hex_.coords != self.current_hex.coords:
+                for place in hex_.visible_places(self.current_hex.coords, visibility):
+                    yield place
 
     def signs(self):
         return self.current_hex.get_signs()
@@ -94,7 +100,9 @@ class Map:
 
     def parse_visible_terrain(self, visibility):
         parsed = defaultdict(set)
-        visible = [terrain for terrain in self.visible_terrain(visibility)]
+        visible_terrain = [terrain for terrain in self.visible_terrain(visibility)]
+        visible_places = [place for place in self.visible_places(visibility)]
+        visible = visible_places + visible_terrain
         for terrain, distance, direction in visible:
             parsed[self.reversed_directions[direction]].add((terrain, distance))
         return [{'direction': direction, 'visible': list(visible)} for direction, visible in parsed.items()]

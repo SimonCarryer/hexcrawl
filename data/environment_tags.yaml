@@ -1,5 +1,4 @@
 goblin tribes:
-  wandering: True
   signs:
     - Skulls mounted on poles.
     - War-drums sounding in the distance.
@@ -30,15 +29,57 @@ goblin tribes:
       occurrence: uncommon
       role: elite
 
-temperate forest:
-  wandering: True
+hills:
   signs:
-    - Tracks in the woods
-    - Snarling in the night
+    - Tracks on the hillsides
+    - Shrieking at night
   monsters:
     - Name: Panther
       appearing: [1, 1]
       occurrence: common
+    - Name: Wolf
+      appearing: [1, 12]
+      occurrence: common
+    - Name: Giant Owl
+      occurrence: rare
+      role: environmental hazard
+      appearing: [1, 1]
+    - Name: Giant Owl
+      occurrence: uncommon
+      appearing: [1, 1]
+    - Name: Giant Eagle
+      occurrence: uncommon
+      appearing: [1, 1]
+    - Name: Harpy
+      appearing: [1, 12]
+      occurrence: rare
+    - Name: Hippogriff
+      appearing: [1, 4]
+      occurrence: uncommon
+    - Name: Peryton
+      appearing: [1, 12]
+      occurrence: rare
+    - Name: Pegasus
+      appearing: [1, 12]
+      occurrence: rare
+    - Name: Bulette
+      appearing: [1, 1]
+      occurrence: common
+    - Name: Chimera
+      appearing: [1, 1]
+      occurrence: uncommon
+    - Name: Wyvern
+      appearing: [1, 1]
+      occurrence: common
+    - Name: Roc
+      appearing: [1, 1]
+      occurrence: common
+
+temperate forest:
+  signs:
+    - Tracks in the woods
+    - Snarling in the night
+  monsters:
     - Name: Wolf
       appearing: [1, 12]
       occurrence: common
@@ -94,7 +135,6 @@ temperate forest:
       occurrence: uncommon
 
 wolf packs:
-  wandering: True
   signs:
     - Howling at the moon.
     - Scratch marks in trees.
@@ -126,7 +166,6 @@ wolf packs:
       occurrence: rare
 
 haunted:
-  wandering: False
   signs:
     - A chill in the air.
     - Strange mounds in the earth.
@@ -150,9 +189,8 @@ haunted:
       occurrence: common
 
 bandits:
-  wandering: True
   signs:
-    - Tracks in the woods.
+    - Marked trails in the woods.
     - Traps and snares.
     - A cache of weapons and food.
   monsters:

@@ -13,6 +13,7 @@ temperate forest:
   - A huge fallen tree
   - A maze of thorn-bushes
   view distance: 1
+  monsters: [temperate forest]
 hills:
   weather:
   - name: Rain
@@ -28,3 +29,4 @@ hills:
   - An exposed hilltop
   - A valley of wind-twisted bushes
   view distance: 2
+  monsters: [hills]

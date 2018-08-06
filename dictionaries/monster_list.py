@@ -29,10 +29,10 @@ def load_environment_tags():
                     merged_data['role'] = 'natural hazard'
                 amended_monsters.append(merged_data)
             else:
-                print('uh oh!')
+                print('uh oh!: %s not loaded' % monster)
         environment_tags[tag]['monsters'] = amended_monsters
     return environment_tags
-            
+    
             
 
 

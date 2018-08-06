@@ -1,12 +1,14 @@
 war graves:
-  type: ruins
   name: The War Graves
   description: A huge graveyard, overgrown with weeds and gnarled trees, the graves torn up and plundered.
   inhabitants: [haunted]
-  rumours: [The graves of soldiers killed in the early days of the war, Some soldiers were buried with their wealth, The King's son was buried in the War Graves in an elaborate tomb]
+  rumours: 
+    - The graves of soldiers killed in the early days of the war
+    - Some soldiers were buried with their wealth
+    - The King's son was buried in the War Graves in an elaborate tomb
   infamy: 3
   challenge: 2
-  visibility: 1
+  view distance: 1
   dungeons:
     - name: Prince's Tomb
       style: dungeon
@@ -14,15 +16,32 @@ war graves:
       challenge: 2
 
 bandit lair:
-  type: hideout
   name: Bandit Lair
   description: Badly-covered trails lead to a darkened cave-mouth. Outside are camp-fires, boxes of goods, and posts for tying up mules and horses.
   inhabitants: [bandits]
-  rumours: [Bandits have a hideout in the forest where they stash their loot, The bandits make sure their hideout is well-defended]
+  rumours: 
+    - Bandits have a hideout in the forest where they stash their loot 
+    - The bandits make sure their hideout is well-defended
   infamy: 2
   challenge: 2
-  visibility: 0
+  view distance: 0
   dungeons:
     - name: Bandit Lair
       style: caves
       challenge: 2
+
+ruined fortress:
+  name: The Fallen Fortress
+  description: Tumbledown stone walls still show evidence of a great fire. The halls and towers of a great fortress are now in ruins.
+  inhabitants: [goblin tribes]
+  rumours:
+    - Before the war, there was a mighty fortress guarding the lands of men.
+    - The fortress is now home to goblins
+  infamy: 3
+  challenge: 3
+  view distance: 2
+  dungeons:
+    - name: Beneath the Keep
+      style: dungeon
+      purpose: stronghold
+      challenge: 3

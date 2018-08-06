@@ -1,6 +1,6 @@
 from encounters import Encounter
 from places import Place
-from dictionaries import environment_tags, terrain_tags, history_tags, xp_values
+from dictionaries import environment_tags, terrain_tags, history_tags, xp_values, places
 from random import choice
 from numpy.random import choice as np_choice
 
@@ -12,11 +12,15 @@ class Hex:
                 setattr(self, key, dictionary[key])
         for key in kwargs:
             setattr(self, key, kwargs[key])
+        self.environment = []
+        for terrain in self.terrain:
+            self.environment += terrain_tags[terrain]['monsters']
         if not hasattr(self, 'history'):
             self.history = []
         if hasattr(self, 'place_names'):
             self.places = {}
             for place_name in self.place_names:
+                self.environment += places[place_name]['inhabitants']
                 self.places[place_name] = Place(place_name)
         else:
             self.places = {}
@@ -92,6 +96,12 @@ class Hex:
             if terrain_tags[terrain]['view distance'] + view_distance > abs_distance:
                 yield (terrain, abs_distance, self.direction(distance))
 
+    def visible_places(self, coords, view_distance):
+        distance = self.distance(coords)
+        abs_distance = self.absolute_distance(coords)
+        for place in self.places:
+            if places[place]['view distance'] + view_distance > abs_distance and places[place]['view distance'] > 0:
+                yield (place, abs_distance, self.direction(distance))
 
     def rumours(self, coords, rumour_distance=0):
         distance = self.distance(coords)
