@@ -1,0 +1,1 @@
+from .treasure import Treasure
