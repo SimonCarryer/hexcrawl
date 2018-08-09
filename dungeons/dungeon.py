@@ -43,7 +43,6 @@ class Dungeon:
         self.fix_unjoined_areas(dungeon)
         self.tag_nodes(dungeon)
         self.assign_rooms(dungeon)
-        self.populate_dungeon(dungeon)
         self.graph = dungeon
 
     def add_secrets(self, dungeon):
@@ -116,17 +115,16 @@ class Dungeon:
             room = self.choose_room(node)
             node['room'] = room['description']
 
-    def populate_dungeon(self, dungeon):
-        populator = DungeonPopulator(dungeon)
+    def populate_dungeon(self, style, level, monsters):
+        populator = DungeonPopulator(self.graph, style, level, monsters)
         populator.populate()
 
     def write_module(self):
         nodes = self.graph.nodes(data=True)
         for number, node in nodes:
-            print(number, node['room'], node.get('encounter', ''))
+            print(number, node['room'], node.get('encounter', ''), node.get('treasure', ''))
 
     def save_dungeon_image(self):
-        self.write_module()
         colours = [i[1]['colour'] for i in self.graph.nodes(data=True)]
         styles = [c['style'] for a, b, c in self.graph.edges(data=True)]
         edges = {(a, b): 'a' for a, b, c in self.graph.edges(data=True) if c['style'] == 'dashed'}

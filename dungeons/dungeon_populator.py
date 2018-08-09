@@ -1,22 +1,20 @@
 from dictionaries import environment_tags
-from encounters import DirectedEncounter
+from encounters import DirectedEncounter, Encounter
+from treasure import Treasure
 import networkx as nx
 import random
 
 class DungeonPopulator:
-    def __init__(self, dungeon):
+    def __init__(self, dungeon, style, level, monsters):
         self.dungeon = dungeon
-        self.style = 'hideout'
-        self.colour = 'r'
-        self.level = 2
-        self.monsters = environment_tags['bandits']['monsters']
-        self.explore_depth = 6
-        self.explored_nodes = []
-
-    def populate(self):
-        style_dict = {'hideout': self.hideout}
-        method = style_dict[self.style]
-        method(self.dungeon)
+        self.style = style
+        style_dict = {'hideout': {'method': self.hideout, 'colour': 'r'},
+                      'immortal guardians': {'method': self.immortal_guardians, 'colour': 'black'}
+        }
+        self.populate = style_dict[style]['method']
+        self.colour = style_dict[style]['colour']
+        self.level = level
+        self.monsters = environment_tags[monsters]['monsters']
 
     def decide_whether_to_explore_further(self):
         return len(self.explored_nodes) + random.randint(1, 3) < self.explore_depth   
@@ -33,7 +31,10 @@ class DungeonPopulator:
         else:
            return
 
-    def hideout(self, dungeon):
+    def hideout(self):
+        dungeon = self.dungeon
+        self.explore_depth = 6
+        self.explored_nodes = []
         # populates back of dungeon with a tough boss, and entrance with some guards. Odd stuff in between.
         # see what else they've explored:
         self.explore(dungeon, 0)
@@ -52,6 +53,8 @@ class DungeonPopulator:
                 encounter = DirectedEncounter(self.level, style='boss')
                 encounter.pick_monsters(self.monsters)
                 node['encounter'] = encounter.display()
+                t = Treasure(self.level)
+                node['treasure'] = t.roll_on_treasure_table()
             elif a == 0:
                 encounter = DirectedEncounter(self.level, style='guards')
                 encounter.pick_monsters(self.monsters)
@@ -68,8 +71,17 @@ class DungeonPopulator:
                     encounter = DirectedEncounter(self.level, style='basic')
                     encounter.pick_monsters(self.monsters)
                     node['encounter'] = encounter.display()
- 
 
-
-
-    
+    def immortal_guardians(self):
+        dungeon = self.dungeon
+        # guardians left by the original inhabitants. They guard secret and important areas.
+        for node, node_data in dungeon.nodes(data=True):
+            node_data['colour'] = self.colour
+            if 'important' in node_data['tags']:
+                encounter = Encounter(self.level)
+                encounter.pick_monsters(self.monsters)
+                node_data['encounter'] = encounter.display()
+            elif 'secret' in node_data['tags']:
+                encounter = Encounter(self.level)
+                encounter.pick_monsters(self.monsters)
+                node_data['encounter'] = encounter.display()

@@ -171,18 +171,36 @@ haunted:
     - Strange mounds in the earth.
     - Old grave-markers.
   monsters:
+    - Name: Banshee
+      appearing: [1, 1]
+      occurrence: rare
+    - Name: Ghast
+      appearing: [1, 20]
+      occurrence: common
+    - Name: Ghost
+      appearing: [1, 4]
+      occurrence: common
+    - Name: Flameskull
+      appearing: [1, 1]
+      occurrence: rare
     - Name: Ghoul
       appearing: [1, 20]
-      occurrence: uncommon
+      occurrence: common
     - Name: Skeleton
       appearing: [1, 20]
       occurrence: common
     - Name: Crawling Claw
-      appearing: [1, 20]
+      appearing: [1, 12]
       occurrence: rare
       role: environmental hazard
+    - Name: Wraith
+      appearing: [1, 1]
+      occurrence: uncommon  
+    - Name: Specter
+      appearing: [1, 3]
+      occurrence: common    
     - Name: Shadow
-      appearing: [1, 20]
+      appearing: [1, 4]
       occurrence: common
     - Name: Wight
       appearing: [1, 20]
