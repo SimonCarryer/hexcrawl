@@ -3,6 +3,7 @@ goblin tribes:
     - Skulls mounted on poles.
     - War-drums sounding in the distance.
     - Crudely-butchered carcasses left to rot.
+    - A crude shrine to a hideous idol.
   monsters:
     - Name: Goblin
       appearing: [1, 20]
@@ -31,8 +32,10 @@ goblin tribes:
 
 hills:
   signs:
-    - Tracks on the hillsides
-    - Shrieking at night
+    - Paw-prints.
+    - Snarling sounds.
+    - A carcass stripped of flesh.
+    - Piles of dung.
   monsters:
     - Name: Panther
       appearing: [1, 1]
@@ -77,8 +80,9 @@ hills:
 
 temperate forest:
   signs:
-    - Tracks in the woods
-    - Snarling in the night
+    - Paw-prints.
+    - Snarling sounds.
+    - A carcass stripped of flesh.
   monsters:
     - Name: Wolf
       appearing: [1, 12]
@@ -137,8 +141,8 @@ temperate forest:
 wolf packs:
   signs:
     - Howling at the moon.
-    - Scratch marks in trees.
-    - Scent marking on rocks.
+    - Scratch marks on high surfaces.
+    - Scent marking.
   monsters:
     - Name: Wolf
       appearing: [1, 12]
@@ -168,8 +172,8 @@ wolf packs:
 haunted:
   signs:
     - A chill in the air.
-    - Strange mounds in the earth.
-    - Old grave-markers.
+    - An eerie wailing in the distance.
+    - Disturbing, shifting shadows.
   monsters:
     - Name: Ghoul
       appearing: [1, 20]
@@ -190,9 +194,10 @@ haunted:
 
 bandits:
   signs:
-    - Marked trails in the woods.
-    - Traps and snares.
+    - Muddy boot-prints.
+    - A collection of traps and snares.
     - A cache of weapons and food.
+    - A campfire and discarded cooking-utensils.
   monsters:
     - Name: Bandit/Pirate
       appearing: [1, 20]
