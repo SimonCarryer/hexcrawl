@@ -1,0 +1,41 @@
+
+
+rooms:
+  - description: Tree roots have burst through the ceiling and run down the walls.
+  - description: A wall has collapsed, filling half the room with rubble.
+  - description: The room is flooded, with a great pool of filthy water.
+    weight: 2
+  - description: Water runs freely down one wall and drains through cracks in the floor.
+  - description: One wall is covered in a thick mat of fungus.
+  - description: The floor has collapsed and there's a great black pit in the center of the room.
+    weight: 2
+  - description: Fallen columns or stalagmites and rubble make the floor of the room difficult to navigate.
+    weight: 3
+  - description: Brown mold covers the floor in great clumps.
+    weight: 4
+  - description: A green slime lurks on the ceiling, waiting to fall.
+    weight: 4
+  - description: A yellow mold grows around passange entrances.
+    weight: 4
+  - description: The ceiling looks unstable, and showers of dust and gravel fall at odd intervals.
+    weight: 2
+  - description: Huge mushrooms fill the room and obscure the exits.
+    weight: 2
+  - description: Poisonous gas fills the room.
+    weight: 5
+doors:
+  - description: Locked door, in good condition
+    weight: 4
+    tags: [built]
+  - description: Collapsed passageway, with barely room to wriggle through
+    weight: 2
+  - description: Unstable passageway, with a chance of falling debris
+    weight: 2
+  - description: Stuck door, which must be forced open
+    weight: 3
+    tags: [built]
+  - description: Locked door, in shoddy condition
+    weight: 4
+    tags: [built]
+  - description: Very long and twisting passageway
+    weight: 2

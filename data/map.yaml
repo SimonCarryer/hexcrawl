@@ -9,7 +9,7 @@
 - coords: [1, 1]
   challenge: 2
   terrain: [temperate forest]
-  environment: [temperate forest, haunted]
+  environment: [temperate forest]
   history: [lost lands]
   place_names: [war graves]
 - coords: [1, 0]
@@ -29,7 +29,6 @@
 - coords: [2, 2]
   challenge: 3
   terrain: [hills]
-  environment: [temperate forest, wolf packs]
   place_names: [ruined fortress]
   history: [lost lands]
 - coords: [2, 1]
