@@ -8,17 +8,17 @@ class Map:
     def __init__(self):
         self.hexes = []
         with open('data/map.yaml') as f:
-            hexes = yaml.load(f.read())
+            hexes = yaml.safe_load(f.read())
         for hex_data in hexes:
             self.hexes.append(Hex(hex_data))
         self.current_hex = self.get_hex_by_coords([0, 0])
-        self.directions = {'North': [1, 1], 
-                           'South': [-1, -1], 
-                           'North-East': [1, 0], 
-                           'South-East': [0, -1], 
-                           'North-West': [0, 1], 
-                           'South-West': [-1, 0], 
-                           'East': [1, -1], 
+        self.directions = {'North': [1, 1],
+                           'South': [-1, -1],
+                           'North-East': [1, 0],
+                           'South-East': [0, -1],
+                           'North-West': [0, 1],
+                           'South-West': [-1, 0],
+                           'East': [1, -1],
                            'West': [-1, 1]}
         self.reversed_directions = {tuple(value): key for key, value in self.directions.items()}
 
@@ -42,7 +42,7 @@ class Map:
         current = self.current_hex.coords
         for direction in all_directions:
             change = self.directions[direction]
-            desired = [sum(x) for x in zip(current, change)]   
+            desired = [sum(x) for x in zip(current, change)]
             try:
                 self.get_hex_by_coords(desired)
                 possible.append(direction)
@@ -66,7 +66,7 @@ class Map:
         encounter['notes'] = 'Wandering from %s' % direction
         encounter['location'] = self.current_hex.get_scenery()
         return encounter
-    
+
     def encounter(self):
         if randint(1, 6) == 1:
             encounter = self.neighbouring_encounter()
@@ -118,7 +118,7 @@ class Map:
     def look(self):
         weather = self.current_hex.get_weather()
         return {'terrain': self.current_hex.terrain,
-                'visible': self.parse_visible_terrain(weather['visibility']), 
+                'visible': self.parse_visible_terrain(weather['visibility']),
                 'weather': weather,
                 'places': self.current_hex.get_places(),
                 'scenery': self.current_hex.get_scenery(),

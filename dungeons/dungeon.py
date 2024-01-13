@@ -14,6 +14,8 @@ dungeon_styles = {'caves': {'connectivity': 1.0, 'rooms': (3, 5), 'class': 'natu
 
 class Dungeon:
     def __init__(self, *initial_data, **kwargs):
+        if not isinstance(initial_data, (list, tuple)):
+            initial_data = [initial_data]  # Ensure initial_data is a sequence
         for dictionary in initial_data:
             for key in dictionary:
                 setattr(self, key, dictionary[key])
@@ -36,7 +38,7 @@ class Dungeon:
         for i in range(initial_room, initial_room+n_rooms):
             dungeon.add_node(i,colour=colour, class_=class_, style=self.style, purpose=self.purpose, tags=[])
         while nx.average_node_connectivity(dungeon) < threshold:
-            rooms = random.sample(dungeon.nodes(), 2)
+            rooms = random.sample(list(dungeon.nodes()), 2)
             dungeon.add_edge(rooms[0], rooms[1], style='solid', weight=1)
         self.add_secrets(dungeon)
         self.label_secret_areas(dungeon)
@@ -128,19 +130,19 @@ class Dungeon:
         colours = [i[1]['colour'] for i in self.graph.nodes(data=True)]
         styles = [c['style'] for a, b, c in self.graph.edges(data=True)]
         edges = {(a, b): 'a' for a, b, c in self.graph.edges(data=True) if c['style'] == 'dashed'}
-        pos = nx.spring_layout(self.graph) 
-        nx.draw_networkx_edges(self.graph, 
+        pos = nx.spring_layout(self.graph)
+        nx.draw_networkx_edges(self.graph,
                             pos,
                             style='dashed',
                             edgelist=[(a, b) for a, b, c in self.graph.edges(data=True) if c['style'] == 'dashed'])
-        nx.draw_networkx_edges(self.graph, 
+        nx.draw_networkx_edges(self.graph,
                             pos,
                             style='solid',
                             edgelist = [(a, b) for a, b, c in self.graph.edges(data=True) if c['style'] == 'solid'])
-        nx.draw_networkx_nodes(self.graph, 
+        nx.draw_networkx_nodes(self.graph,
                             pos,
                             node_color=colours)
-        nx.draw_networkx_edge_labels(self.graph, 
+        nx.draw_networkx_edge_labels(self.graph,
                             pos,
                             edge_labels=edges)
         nx.draw_networkx_labels(self.graph,

@@ -17,7 +17,7 @@ def load_monster_manual():
 def load_environment_tags():
     monster_dict = load_monster_manual()
     with open('data/environment_tags.yaml') as f:
-        environment_tags = yaml.load(f.read())
+        environment_tags = yaml.safe_load(f.read())
     for tag in environment_tags.keys():
         amended_monsters = []
         for monster in environment_tags[tag]['monsters']:
@@ -32,8 +32,8 @@ def load_environment_tags():
                 print('uh oh!: %s not loaded' % monster)
         environment_tags[tag]['monsters'] = amended_monsters
     return environment_tags
-    
-            
+
+
 
 
 
