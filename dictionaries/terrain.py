@@ -2,9 +2,9 @@ import yaml
 
 def load_terrain():
     with open('data/terrain_tags.yaml') as f:
-        terrain_tags = yaml.load(f.read())
+        terrain_tags = yaml.safe_load(f.read())
     with open('data/weather.yaml') as f:
-        weather = yaml.load(f.read())
+        weather = yaml.safe_load(f.read())
     for terrain_type in terrain_tags.keys():
         weather_types = []
         for weather_type in terrain_tags[terrain_type]['weather']:
